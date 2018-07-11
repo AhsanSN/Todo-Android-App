@@ -37,6 +37,25 @@
         <h1 class="title">Projects</h1>
       </ion-header-bar>
     </ion-side-menu>
+    <!-- add item -->
+    <ion-side-menu-content>
+      <ion-header-bar class="bar-dark">
+        <h1 class="title">Todo</h1>
+        <!-- New Task button-->
+        <button class="button button-icon" ng-click="newTask()">
+          <i class="icon ion-compose"></i>
+        </button>
+      </ion-header-bar>
+      <ion-content>
+        <!-- our list and list items -->
+        <ion-list>
+          <ion-item ng-repeat="task in tasks">
+            {{task.title}}
+          </ion-item>
+        </ion-list>
+      </ion-content>
+    </ion-side-menu-content>
+
     <script id="new-task.html" type="text/ng-template">
 
       <div class="modal">
@@ -66,6 +85,7 @@
       </div>
 
     </script>
+
 
   </ion-side-menus>
 </body>
