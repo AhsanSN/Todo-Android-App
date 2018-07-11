@@ -1,15 +1,35 @@
-// Ionic Starter App
-
-// angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
-// the 2nd parameter is an array of 'requires'
 angular.module('todo', ['ionic'])
 
-  .controller('TodoCtrl', function ($scope) {
+  .controller('TodoCtrl', function ($scope, $ionicModal) {
+    // No need for testing data anymore
     $scope.tasks = [
-      { title: 'Collect coins' },
-      { title: 'Eat mushrooms' },
-      { title: 'Get high enough to grab the flag' },
-      { title: 'Find the Princess' }
+      { title: 'My task 1' }
     ];
+
+    // Create and load the Modal
+    $ionicModal.fromTemplateUrl('new-task.html', function (modal) {
+      $scope.taskModal = modal;
+    }, {
+        scope: $scope,
+        animation: 'slide-in-up'
+      });
+
+    // Called when the form is submitted
+    $scope.createTask = function (task) {
+      $scope.tasks.push({
+        title: task.title
+      });
+      $scope.taskModal.hide();
+      task.title = "";
+    };
+
+    // Open our new task modal
+    $scope.newTask = function () {
+      $scope.taskModal.show();
+    };
+
+    // Close the new task modal
+    $scope.closeNewTask = function () {
+      $scope.taskModal.hide();
+    };
   })
